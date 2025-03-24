@@ -1,8 +1,5 @@
-import { Component, signal, computed } from '@angular/core';
-import { DUMMY_USERS } from '../app/dummy-users';
-
-// Only calculated once when this file gets parsed (ie const) - can be moved to component class
-// const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
+import { Component, computed, input } from '@angular/core';
+// import { Component, Input, input } from '@angular/core';
 
 @Component({
   selector: 'app-user',
@@ -11,39 +8,26 @@ import { DUMMY_USERS } from '../app/dummy-users';
   styleUrl: './user.component.css'
 })
 export class UserComponent {
+  // without using input() function (ie signal)
+  // @Input({required: true}) avatar !: String;
+  // @Input({required: true}) name !: String;
 
-  // All properties defined here are available in the template above
-
-  // Version since Angular 2 without signal
-  // selectedUser = DUMMY_USERS[this.randomizeIndex()];
-
-  // Signal Version since Angular 16
-  // Initializing the signal here
-  selectedUser = signal(DUMMY_USERS[this.randomizeIndex()]);
-
-  // Signal version since Angular 16
-  imagePath = computed(() => 'assets/users/' + this.selectedUser().avatar);
-
-  // For angular 2 when not using signals
-  // Define a getter that can be used in the template. Cannot take argument
   // get imagePath() {
-  //   return 'assets/users/' + this.selectedUser.avatar
+  //  return 'assets/users/' + this.avatar;
   // }
 
-  // get randomizeIndex() {...}  also possible but then so not put()
-  // randomizeIndex() {...}  also possible but then need to put() and also available in markup
-  private randomizeIndex() {
-    return Math.floor(Math.random() * DUMMY_USERS.length);
-  }
 
-  // Define a normal method that returns nothing.  ie:  not leading:  get
-  onSelectUser() {
-    const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
+  // Using the (internally) RO input ie: avatar used as a signal
+  avatar = input<string>('');
 
-    // Angular 2 method of updating the value
-    // this.selectedUser = DUMMY_USERS[this.randomizeIndex()];
+  // Using the (internally )RO input ie: name used as a signal
+  // Can alternatively indicate it is required
+  // name = input<string>('');
+  name = input.required<string>();
 
-    // Angular 16 + signal method of updating a signal
-    this.selectedUser.set(DUMMY_USERS[this.randomizeIndex()]);
-  }
+  imagePath = computed(() => {
+    return 'assets/users/' + this.avatar();
+  });
+
+  onSelectUser() {}
 }

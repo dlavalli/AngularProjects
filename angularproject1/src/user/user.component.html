@@ -1,26 +1,6 @@
 <div>
   <button (click)="onSelectUser()">
-    <!-- Version using a signal -->
-    <img [src]="imagePath()"/>
-
-    <!-- <img [src]="imagePath"/> -->
-    <!-- <img [src]="'assets/users/' + selectedUser.avatar" [alt]="selectedUser.name"/>  -->
-    <!-- When to Use <span> vs <p> in HTML.
-         The choice between <span> and <p> depends on the context: Use the <p> tag for paragraphs or blocks of text that require a new line.
-         Use the <span> tag for inline text styling or dynamic content manipulation without breaking the line.Jan 3, 2025
-
-         There are 3 available ways to bind to variables from the component class
-         - String interpolation:  <span>{{ selectedUser.name }}</span>  ==> Where you would have an expression or as in this case, a component property,
-                                                                            This method is usually used within tags
-         - property binding syntax : Basically put the property in ""  and wrap with []  the attribute it is assigned to
-                                     ex: <img [src]="'assets/users/' + selectedUser.avatar"/>
-         - property binding syntax alternative : that does allow you to bind attributes to dynamic values
-                                                (ie: property that does not exist in the DOM object but valid attribute for the tag).
-                                                <div role="progressbar" [attr.aria-valuenow]="currentVal" [attr.aria-valuemax]="maxVal">...</div>
-
-    -->
-    <!-- The angular 2 way of accessingthe value
-         <span>{{ selectedUser.name }}</span>  -->
-         <span>{{ selectedUser().name}}</span>
+    <img [src]="imagePath()" [alt]="name()"/>
+    <span>{{ name() }}</span>
   </button>
 </div>

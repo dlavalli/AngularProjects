@@ -15,7 +15,8 @@ import { DUMMY_USERS } from './dummy-users';
 
 export class AppComponent {
   users = DUMMY_USERS;
-  selectedUserId = 'u1';
+  // selectedUserId = 'u1';
+  selectedUserId?: string
 
   get selectedUser() {
     // NOTE : use of trailing ! on find()! indicate we are certain there will be a value found
